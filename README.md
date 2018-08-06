@@ -38,8 +38,8 @@
 
 ## 如何使用
 
-* 修改 docker-compose.yml 中的 `MASTER_ADDRESSES` 为需要代理的数据库地址
-* 修改 config/logstash/pipline/logstash.conf 中 output.elasticsearch 的地址为你需要的地址
+* 修改 `docker-compose.yml` 中的 `MASTER_ADDRESSES` 为需要代理的数据库地址
+* 修改 `config/logstash/pipline/logstash.conf` 中 output.elasticsearch 的地址为你需要的地址
 * 运行 `./run.sh`
 
 ## 已知问题
