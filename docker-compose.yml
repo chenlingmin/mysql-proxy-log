@@ -1,0 +1,27 @@
+nfqmysqlproxy:
+  container_name: proxy
+  hostname: proxy
+  image: nfqmysqlproxy:latest
+  restart: always
+  environment:
+    LOG_LEVEL: info 
+    MASTER_ADDRESSES: "localhost:3306"
+    PROXY_LUA_SCRIPT: "/mysql-proxy/lua/sqllog.lua"
+  volumes:
+    - "$PWD/logs/proxy:/mysql-proxy/logs"
+    - "$PWD/config/proxy/lua:/mysql-proxy/lua"
+  expose:
+    - "4041"
+    - "3306"
+  ports:
+    - "3306:3306"
+    - "4041:4041"
+
+logstash:
+  container_name: logstash
+  restart : always
+  image: docker.elastic.co/logstash/logstash:6.1.4
+  volumes:
+    - "$PWD/config/logstash/pipeline:/usr/share/logstash/pipeline" 
+    - "$PWD/config/logstash/config:/usr/share/logstash/config" 
+    - "$PWD/logs:/logs" 
